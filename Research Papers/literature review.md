@@ -185,7 +185,7 @@
 
 
 
-**Intresting Tutorials that closely align with our system:**
+# **Intresting Tutorials that closely align with our system:**
 1. [GraphRag using Llamma and Neo4j](https://medium.com/@omotolaniosems/building-an-advanced-rag-chatbot-with-knowledge-graphs-using-llamaindex-neo4j-and-llama-3-1e3d3b07ede3)
 
  ![system arch](image-1.png)
