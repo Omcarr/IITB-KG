@@ -1,3 +1,5 @@
 Neo4j-2c62ff24-Created-2025-04-26.txt
 venv/
 .env
+.chainlit
+.files
