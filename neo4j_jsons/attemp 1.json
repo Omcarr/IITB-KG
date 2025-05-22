@@ -1,0 +1,306 @@
+﻿[
+  {
+    "n": {
+      "identity": 0,
+      "labels": [
+        "EQUIPMENT"
+      ],
+      "properties": {
+        "name": "GasTurbine1",
+        "rul": "300 hrs"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:0"
+    }
+  },
+  {
+    "n": {
+      "identity": 1,
+      "labels": [
+        "DETECTION_METHOD"
+      ],
+      "properties": {
+        "name": "Vibration monitoring"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:1"
+    }
+  },
+  {
+    "n": {
+      "identity": 2,
+      "labels": [
+        "SPARE_PART"
+      ],
+      "properties": {
+        "name": "Fuel Pump"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:2"
+    }
+  },
+  {
+    "n": {
+      "identity": 3,
+      "labels": [
+        "SPARE_PART"
+      ],
+      "properties": {
+        "name": "Fuel Line"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:3"
+    }
+  },
+  {
+    "n": {
+      "identity": 4,
+      "labels": [
+        "DETECTION_METHOD"
+      ],
+      "properties": {
+        "name": "Pressure monitoring"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:4"
+    }
+  },
+  {
+    "n": {
+      "identity": 5,
+      "labels": [
+        "SPARE_PART"
+      ],
+      "properties": {
+        "name": "Fuel Filter"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:5"
+    }
+  },
+  {
+    "n": {
+      "identity": 6,
+      "labels": [
+        "DETECTION_METHOD"
+      ],
+      "properties": {
+        "name": "Visual inspection"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:6"
+    }
+  },
+  {
+    "n": {
+      "identity": 7,
+      "labels": [
+        "SPARE_PART"
+      ],
+      "properties": {
+        "name": "OilPump"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:7"
+    }
+  },
+  {
+    "n": {
+      "identity": 8,
+      "labels": [
+        "DETECTION_METHOD"
+      ],
+      "properties": {
+        "name": "PressureMonitoring"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:8"
+    }
+  },
+  {
+    "n": {
+      "identity": 9,
+      "labels": [
+        "DETECTION_METHOD"
+      ],
+      "properties": {
+        "name": "Leak detection"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:9"
+    }
+  },
+  {
+    "n": {
+      "identity": 10,
+      "labels": [
+        "SPARE_PART"
+      ],
+      "properties": {
+        "name": "Oil Hose"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:10"
+    }
+  },
+  {
+    "n": {
+      "identity": 11,
+      "labels": [
+        "SPARE_PART"
+      ],
+      "properties": {
+        "name": "OilFilter"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:11"
+    }
+  },
+  {
+    "n": {
+      "identity": 12,
+      "labels": [
+        "DETECTION_METHOD"
+      ],
+      "properties": {
+        "name": "OilAnalysis"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:12"
+    }
+  },
+  {
+    "n": {
+      "identity": 13,
+      "labels": [
+        "SPARE_PART"
+      ],
+      "properties": {
+        "name": "Air Compressor"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:13"
+    }
+  },
+  {
+    "n": {
+      "identity": 14,
+      "labels": [
+        "SPARE_PART"
+      ],
+      "properties": {
+        "name": "Air Lines"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:14"
+    }
+  },
+  {
+    "n": {
+      "identity": 15,
+      "labels": [
+        "SYSTEM"
+      ],
+      "properties": {
+        "name": "FuelSystem",
+        "rul": "1000 hrs"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:15"
+    }
+  },
+  {
+    "n": {
+      "identity": 16,
+      "labels": [
+        "COMPONENT"
+      ],
+      "properties": {
+        "name": "FuelPump"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:16"
+    }
+  },
+  {
+    "n": {
+      "identity": 17,
+      "labels": [
+        "FAILURE_MODE"
+      ],
+      "properties": {
+        "severity": "Critical",
+        "name": "Seizing"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:17"
+    }
+  },
+  {
+    "n": {
+      "identity": 18,
+      "labels": [
+        "MAINTENANCE_STRATEGY"
+      ],
+      "properties": {
+        "name": "Predictive Maintenance"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:18"
+    }
+  },
+  {
+    "n": {
+      "identity": 19,
+      "labels": [
+        "CONDITION_DATA"
+      ],
+      "properties": {
+        "name": "Vibration levels"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:19"
+    }
+  },
+  {
+    "n": {
+      "identity": 20,
+      "labels": [
+        "SYSTEM"
+      ],
+      "properties": {
+        "name": "LubeOilSystem",
+        "rul": "1500 hrs"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:20"
+    }
+  },
+  {
+    "n": {
+      "identity": 21,
+      "labels": [
+        "COMPONENT"
+      ],
+      "properties": {
+        "name": "OilPump"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:21"
+    }
+  },
+  {
+    "n": {
+      "identity": 22,
+      "labels": [
+        "MAINTENANCE_STRATEGY"
+      ],
+      "properties": {
+        "name": "PredictiveMaintenance"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:22"
+    }
+  },
+  {
+    "n": {
+      "identity": 23,
+      "labels": [
+        "CONDITION_DATA"
+      ],
+      "properties": {
+        "name": "PressureDrop"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:23"
+    }
+  },
+  {
+    "n": {
+      "identity": 24,
+      "labels": [
+        "COMPONENT"
+      ],
+      "properties": {
+        "name": "OilFilter"
+      },
+      "elementId": "4:d9d8cca5-1733-42d9-808f-8046bcf1daaf:24"
+    }
+  }
+]
