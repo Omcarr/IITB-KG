@@ -13,22 +13,6 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 
-#load the csv
-# try:
-#     df = pd.read_csv(file_path, 
-#                      engine='python',
-#                      on_bad_lines='skip',
-#                      skipinitialspace=True)
-#     print(f"CSV loaded successfully! Shape: {df.shape}")
-#     print(f"Columns: {list(df.columns)}")
-# except Exception as e:
-#     print(f"Error reading CSV: {e}")
-    
-    
-#neo4j driver connection
-# driver = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", "password"))
-
-
 def main():
     load_dotenv()
 

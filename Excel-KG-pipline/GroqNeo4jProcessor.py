@@ -112,7 +112,6 @@ class CSVToKnowledgeGraph:
             
             response_text = response.choices[0].message.content.strip()
             
-            # Clean up the response to extract JSON
             json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
             if json_match:
                 json_str = json_match.group()
@@ -151,7 +150,6 @@ class CSVToKnowledgeGraph:
         rul = row.get('RUL', '')
         spare_parts = row.get('Spare Parts', '')
         
-        # Create structured text for the AI to analyze
         text_content = f"""
         Equipment Level: {level}
         Main Entity: {entity}
