@@ -1,0 +1,238 @@
+{
+  "analysis": {
+    "csv_structure": "The CSV structure contains information about equipment, their assemblies, components, failure modes, and maintenance strategies.",
+    "identified_entities": [
+      "Equipment",
+      "Assembly",
+      "Component",
+      "FailureMode",
+      "MaintenanceStrategy",
+      "DetectionMethod",
+      "SparePart"
+    ],
+    "identified_relationships": [
+      "HAS_ASSEMBLY",
+      "HAS_COMPONENT",
+      "HAS_FAILURE_MODE",
+      "HAS_MAINTENANCE_STRATEGY",
+      "USES_DETECTION_METHOD",
+      "REQUIRES_SPARE_PART"
+    ],
+    "data_quality_notes": "There are no missing values in the provided data, but there might be duplicates or inconsistencies in the actual dataset."
+  },
+  "schema": {
+    "nodes": [
+      {
+        "label": "Equipment",
+        "properties": [
+          "name",
+          "level"
+        ],
+        "description": "Represents a piece of equipment",
+        "unique_property": "name"
+      },
+      {
+        "label": "Assembly",
+        "properties": [
+          "name"
+        ],
+        "description": "Represents an assembly of a piece of equipment",
+        "unique_property": "name"
+      },
+      {
+        "label": "Component",
+        "properties": [
+          "name"
+        ],
+        "description": "Represents a component of an assembly",
+        "unique_property": "name"
+      },
+      {
+        "label": "FailureMode",
+        "properties": [
+          "name",
+          "severity",
+          "consequence"
+        ],
+        "description": "Represents a failure mode of a component",
+        "unique_property": "name"
+      },
+      {
+        "label": "MaintenanceStrategy",
+        "properties": [
+          "name",
+          "frequency"
+        ],
+        "description": "Represents a maintenance strategy",
+        "unique_property": "name"
+      },
+      {
+        "label": "DetectionMethod",
+        "properties": [
+          "name"
+        ],
+        "description": "Represents a detection method",
+        "unique_property": "name"
+      },
+      {
+        "label": "SparePart",
+        "properties": [
+          "name"
+        ],
+        "description": "Represents a spare part",
+        "unique_property": "name"
+      }
+    ],
+    "relationships": [
+      {
+        "type": "HAS_ASSEMBLY",
+        "from": "Equipment",
+        "to": "Assembly",
+        "properties": [],
+        "description": "An equipment has an assembly"
+      },
+      {
+        "type": "HAS_COMPONENT",
+        "from": "Assembly",
+        "to": "Component",
+        "properties": [],
+        "description": "An assembly has a component"
+      },
+      {
+        "type": "HAS_FAILURE_MODE",
+        "from": "Component",
+        "to": "FailureMode",
+        "properties": [],
+        "description": "A component has a failure mode"
+      },
+      {
+        "type": "HAS_MAINTENANCE_STRATEGY",
+        "from": "Equipment",
+        "to": "MaintenanceStrategy",
+        "properties": [],
+        "description": "An equipment has a maintenance strategy"
+      },
+      {
+        "type": "USES_DETECTION_METHOD",
+        "from": "FailureMode",
+        "to": "DetectionMethod",
+        "properties": [],
+        "description": "A failure mode uses a detection method"
+      },
+      {
+        "type": "REQUIRES_SPARE_PART",
+        "from": "Component",
+        "to": "SparePart",
+        "properties": [],
+        "description": "A component requires a spare part"
+      }
+    ]
+  },
+  "cypher_queries": {
+    "constraints": [
+      "CREATE CONSTRAINT equipment_name_unique IF NOT EXISTS FOR (n:Equipment) REQUIRE n.name IS UNIQUE",
+      "CREATE CONSTRAINT assembly_name_unique IF NOT EXISTS FOR (n:Assembly) REQUIRE n.name IS UNIQUE",
+      "CREATE CONSTRAINT component_name_unique IF NOT EXISTS FOR (n:Component) REQUIRE n.name IS UNIQUE",
+      "CREATE CONSTRAINT failure_mode_name_unique IF NOT EXISTS FOR (n:FailureMode) REQUIRE n.name IS UNIQUE",
+      "CREATE CONSTRAINT maintenance_strategy_name_unique IF NOT EXISTS FOR (n:MaintenanceStrategy) REQUIRE n.name IS UNIQUE",
+      "CREATE CONSTRAINT detection_method_name_unique IF NOT EXISTS FOR (n:DetectionMethod) REQUIRE n.name IS UNIQUE",
+      "CREATE CONSTRAINT spare_part_name_unique IF NOT EXISTS FOR (n:SparePart) REQUIRE n.name IS UNIQUE"
+    ],
+    "indexes": [
+      "CREATE INDEX equipment_name_index IF NOT EXISTS FOR (n:Equipment) ON (n.name)",
+      "CREATE INDEX assembly_name_index IF NOT EXISTS FOR (n:Assembly) ON (n.name)",
+      "CREATE INDEX component_name_index IF NOT EXISTS FOR (n:Component) ON (n.name)",
+      "CREATE INDEX failure_mode_name_index IF NOT EXISTS FOR (n:FailureMode) ON (n.name)",
+      "CREATE INDEX maintenance_strategy_name_index IF NOT EXISTS FOR (n:MaintenanceStrategy) ON (n.name)",
+      "CREATE INDEX detection_method_name_index IF NOT EXISTS FOR (n:DetectionMethod) ON (n.name)",
+      "CREATE INDEX spare_part_name_index IF NOT EXISTS FOR (n:SparePart) ON (n.name)"
+    ],
+    "data_import": [
+      "LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row CREATE (e:Equipment {name: row.Level, level: row.Level})",
+      "LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row MATCH (e:Equipment {name: row.Level}) CREATE (a:Assembly {name: row.Entity})-[:HAS_ASSEMBLY]->(e)",
+      "LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row MATCH (a:Assembly {name: row.Entity}) CREATE (c:Component {name: row.RelatedEntity})-[:HAS_COMPONENT]->(a)",
+      "LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row MATCH (c:Component {name: row.RelatedEntity}) CREATE (f:FailureMode {name: row.FailureMode, severity: row.Severity, consequence: row.Consequence})-[:HAS_FAILURE_MODE]->(c)",
+      "LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row MATCH (e:Equipment {name: row.Level}) CREATE (m:MaintenanceStrategy {name: row.MaintenanceStrategy, frequency: row.Frequency})-[:HAS_MAINTENANCE_STRATEGY]->(e)",
+      "LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row MATCH (f:FailureMode {name: row.FailureMode}) CREATE (d:DetectionMethod {name: row.DetectionMethod})-[:USES_DETECTION_METHOD]->(f)",
+      "LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row MATCH (c:Component {name: row.RelatedEntity}) CREATE (s:SparePart {name: row.SpareParts})-[:REQUIRES_SPARE_PART]->(c)"
+    ]
+  },
+  "mapping": {
+    "csv_column_to_graph": {
+      "Level": {
+        "maps_to": "Equipment.name",
+        "node_label": "Equipment",
+        "data_type": "string",
+        "transformation": "none"
+      },
+      "Entity": {
+        "maps_to": "Assembly.name",
+        "node_label": "Assembly",
+        "data_type": "string",
+        "transformation": "none"
+      },
+      "Related Entity": {
+        "maps_to": "Component.name",
+        "node_label": "Component",
+        "data_type": "string",
+        "transformation": "none"
+      },
+      "Failure Mode": {
+        "maps_to": "FailureMode.name",
+        "node_label": "FailureMode",
+        "data_type": "string",
+        "transformation": "none"
+      },
+      "Severity": {
+        "maps_to": "FailureMode.severity",
+        "node_label": "FailureMode",
+        "data_type": "string",
+        "transformation": "none"
+      },
+      "Consequence": {
+        "maps_to": "FailureMode.consequence",
+        "node_label": "FailureMode",
+        "data_type": "string",
+        "transformation": "none"
+      },
+      "Maintenance Strategy": {
+        "maps_to": "MaintenanceStrategy.name",
+        "node_label": "MaintenanceStrategy",
+        "data_type": "string",
+        "transformation": "none"
+      },
+      "Frequency": {
+        "maps_to": "MaintenanceStrategy.frequency",
+        "node_label": "MaintenanceStrategy",
+        "data_type": "string",
+        "transformation": "none"
+      },
+      "Detection Method": {
+        "maps_to": "DetectionMethod.name",
+        "node_label": "DetectionMethod",
+        "data_type": "string",
+        "transformation": "none"
+      },
+      "Spare Parts": {
+        "maps_to": "SparePart.name",
+        "node_label": "SparePart",
+        "data_type": "string",
+        "transformation": "none"
+      }
+    }
+  },
+  "sample_queries": [
+    {
+      "description": "Find all equipment with their assemblies and components",
+      "cypher": "MATCH (e:Equipment)-[:HAS_ASSEMBLY]->(a:Assembly)-[:HAS_COMPONENT]->(c:Component) RETURN e, a, c"
+    },
+    {
+      "description": "Find all failure modes with their detection methods",
+      "cypher": "MATCH (f:FailureMode)-[:USES_DETECTION_METHOD]->(d:DetectionMethod) RETURN f, d"
+    },
+    {
+      "description": "Find all spare parts required by components",
+      "cypher": "MATCH (c:Component)-[:REQUIRES_SPARE_PART]->(s:SparePart) RETURN c, s"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+Level,Entity,Relationship,Related Entity,Failure Mode,Severity,Consequence,Detection Method,Maintenance Strategy,Frequency,Condition Monitoring Data,RUL,Spare Parts
+Equipment,GasTurbine1,HasAssembly,FuelSystem,Fuel Pump Seizing,Major,Operational downtime,Vibration monitoring,Predictive Maintenance (PdM),1000 hours,Vibration levels > threshold,500 hrs,Fuel Pump
+Equipment,GasTurbine1,HasAssembly,FuelSystem,Fuel Leak,Major,Operational downtime,Pressure monitoring,Condition-Based Maintenance (CBM),500 hours,Pressure drop,300 hrs,Fuel Line
+Equipment,GasTurbine1,HasAssembly,FuelSystem,Fuel Filter Clogging,Minor,Reduced performance,Visual inspection,Time-Based Maintenance (TBM),Every 6 months,Visual inspection,1000 hrs,Fuel Filter
+Equipment,GasTurbine1,HasAssembly,LubeOilSystem,Oil Pump Failure,Critical,System shutdown,Pressure monitoring,Condition-Based Maintenance (CBM),2000 hours,Pressure drop,500 hrs,Oil Pump
+Equipment,GasTurbine1,HasAssembly,LubeOilSystem,Oil Leak,Major,Increased wear on parts,Leak detection,Predictive Maintenance (PdM),1000 hours,Pressure drop,400 hrs,Oil Hose
+Equipment,GasTurbine1,HasAssembly,LubeOilSystem,Oil Filter Clogging,Minor,Reduced flow,Oil analysis,Time-Based Maintenance (TBM),Every 6 months,Oil analysis,1500 hrs,Oil Filter
+Equipment,GasTurbine1,HasAssembly,HPAirSystem,Air Compressor Failure,Critical,Complete shutdown,Vibration monitoring,Predictive Maintenance (PdM),2000 hours,Vibration levels > threshold,1000 hrs,Air Compressor
+Equipment,GasTurbine1,HasAssembly,HPAirSystem,Air Leak,Major,Reduced air pressure,Leak detection,Condition-Based Maintenance (CBM),1000 hours,Pressure monitoring,300 hrs,Air Lines
+FuelSystem,FuelSystem,HasComponent,FuelPump,Seizing,Major,Performance loss,Vibration monitoring,Predictive Maintenance (PdM),1000 hours,Vibration levels > threshold,500 hrs,Fuel Pump
+FuelSystem,FuelSystem,HasComponent,FuelFilter,Clogging,Minor,Reduced flow,Visual inspection,Time-Based Maintenance (TBM),Every 6 months,Visual inspection,1000 hrs,Fuel Filter
+LubeOilSystem,LubeOilSystem,HasComponent,OilPump,Failure,Critical,System shutdown,Pressure monitoring,Condition-Based Maintenance (CBM),2000 hours,Pressure drop,500 hrs,Oil Pump
+LubeOilSystem,LubeOilSystem,HasComponent,OilFilter,Clogging,Minor,Reduced flow,Oil analysis,Time-Based Maintenance (TBM),Every 6 months,Oil analysis,1500 hrs,Oil Filter
+HPAirSystem,HPAirSystem,HasComponent,AirCompressor,Failure,Critical,Complete shutdown,Vibration monitoring,Predictive Maintenance (PdM),2000 hours,Vibration levels > threshold,1000 hrs,Air Compressor
+HPAirSystem,HPAirSystem,HasComponent,AirFilter,Clogging,Minor,Reduced performance,Visual inspection,Time-Based Maintenance (TBM),Every 6 months,Visual inspection,1000 hrs,Air Filter
