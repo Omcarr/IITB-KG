@@ -1,0 +1,382 @@
+1 FUNDAMENTALS OF GAS TURBINE ENGINES 
+ 
+  
+INTRODUCTION  
+ 
+The gas turbine is an internal combustion engi ne that uses air as the working fluid.  
+The engine extracts chemical energy from fuel and converts it to mechanical energy 
+using the gaseous energy of the working fl uid (air) to drive the engine and propeller, 
+which, in turn, propel the airplane.   
+THE GAS TURBINE CYCLE 
+ 
+The basic principle of the airplane turbi ne engine is identical to any and all engines 
+that extract energy from chemical fuel.  T he basic 4 steps for any internal combustion 
+engine are:  
+1.  Intake of air (and possibly fuel). 2.  Compression of the air (and possibly fuel). 3.  Combustion, where fuel is injected (i f it was not drawn in  with the intake air) 
+and burned to convert the stored energy. 
+4.  Expansion and exhaust, where the converted energy is put to use.  
+ In the case of a piston engine, such as t he engine in a car or reciprocating airplane 
+engine, the intake, compression, combusti on, and exhaust steps occur in the same 
+place (cylinder head) at different ti mes as the piston goes up and down.  
+ In the turbine engine, however, these same f our steps occur at the same time but in 
+different places.  As a result of this fundamental difference, the turbine has engine 
+sections called:  
+1.  The inlet section 2.  The compressor section 3.  The combustion section (the combustor) 4.  The turbine (and exhaust) section. 
+ The turbine section of the gas  turbine engine has the task of producing usable output 
+shaft power to drive the propelle r.  In addition, it must also provide power to drive the 
+compressor and all engine accessories.  It does this by expanding the high 
+temperature, pressure, and velocity gas  and converting the gaseous energy to 
+mechanical energy in the form of shaft power.  A large mass of air must be supplied to the turbine in order to produce the necessary 
+power.  This mass of air is supplied by the compressor, which draws the air into the engine and squeezes it to provide high-pressure  air to the turbine.  The compressor 
+2 does this by converting mechanical energy fr om the turbine to gaseous energy in the 
+form of pressure and temperature.  If the compressor and the turbine were 100% efficient, the compressor would supply 
+all the air needed by the turbine.  At the same time, the turbine would supply the necessary power to drive the compressor.  In this case, a perpetual motion machine 
+would exist.  However, frictional losses and mechanical system inefficiencies do not 
+allow a perpetual motion machine to operate.   Additional energy must be added to the 
+air to accommodate for these losses.  Powe r output is also desired from the engine 
+(beyond simply driving the compressor); thus , even more energy must be added to the 
+air to produce this excess power.  Energy addition to the system is accomplished in the combustor.  Chemical energy from fuel  as it is burned is converted to gaseous 
+energy in the form of high temperatures and high velocity as the air passes through 
+the combustor.  The gaseous energy is conv erted back to mechanical energy in the 
+turbine, providing power to drive the compressor and the output shaft.   
+SOME BASIC PRINCIPLES 
+ 
+As air passes through a gas turbine engi ne, aerodynamic and energy requirements 
+demand changes in the air’s velocity and pressu re.  During compression, a rise in the 
+air pressure is required, but not an increase in its velocity.  After compression and 
+combustion have heated the air, an increase in the velocity of gases is necessary in 
+order for the turbine rotors to develop power .  The size and shape of the ducts through 
+which the air flows affect these various c hanges.  Where a conversion from velocity to 
+pressure is required, the pa ssages are divergent.  Conversely, if a conversion from 
+pressure to velocity is needed, a convergent duct is used.  Before further discussion, an explanation of  convergent ducts, divergent ducts, and the 
+behavior of air within these ducts should be made.  An understanding of the difference 
+between static pressure (P
+s), impact pressure, (P i), and total pressure (P t) is also 
+needed.  The difference between static, impact, and tota l pressures is as follows.  Static 
+pressure is the force per unit area exerted on the walls of a container by a stationary 
+fluid.  An example is the air pressure wit hin a car tire.  Impact pressure, on the other 
+hand, is the force per unit area exerted by fl uids in motion.  Impact pressure is a 
+function of the velocity of the fluid.  An example of impact pressure is the pressure 
+exerted on one's hand held outside a moving car’ s window.  Total pressure is the sum 
+of static and impact pressures.    Figure 2-1 illustrates the methods  used to measure pressures.   Part (a) illustrates the 
+measurement of static pressure .  Static pressure will not take  into account the velocity 
+of the air.  Part (b) illustrates the measur ement of total pressure, which accounts for 
+both static pressure and the pressure due to the moving fluid (impac t pressure).  In 
+3 order to obtain impact pressure, the value of the static pressure is  subtracted from the 
+value of total pressure. 
+ 
+Figure 2-2 shows the principle of divergent  ducts, where energy is neither being added 
+or taken away, but where the gaseous energy  is being converted from velocity to 
+pressure and temperature.  There is a veloci ty decrease as air flows from a small inlet 
+to a larger outlet.  As velocity decreases, impact pressure (P i) also decreases.  Since 
+no energy is added or subt racted from the system, total pressure (P t) for the air 
+remains constant and static pressure (P s) increases.  One way of viewing this is that 
+the impact pressure is convert ed to static pressure; thus, a static pressure rise is seen 
+as air flows through a divergent duct and is co mpressed.  A temperature rise is also 
+noticed since compression is a heating process. 
+ 
+The convergent duct operates exactly in reve rse of the divergent  duct.  Figure 2-3 
+shows the principle of conv ergent ducts, where energy is neither being added or taken 
+away, but where the gaseous energy is  being converted from pressure and 
+temperature to velocity.  There is a velocity increase as air flows from a large inlet to a 
+smaller outlet.  As velocity increases, im pact pressure also increases.  Since no 
+energy is added or subtracted from the system , total pressure remains constant and 
+static pressure decreases.  One way of vie wing this is that the static pressure is 
+converted to impact pressure; thus, a static pressure decrease is seen as air flows 
+through a convergent duct and goes through expansion.  A temperature drop is 
+associated with any expansion process.  
+
+4 NOTE: Even though the static and impact pr essures are changing as fluids flow 
+through either convergent or divergent ducts, the total pressure does not change.  This 
+is true if fluid friction is neglected and energy is not added or  taken away from the fluid 
+flow.  In actuality, there will be a slight dec rease in total pressure because of fluid 
+frictional losses.  
+ 
+ 
+PERFORMANCE AND EFFICIENCY 
+ 
+The type of operation for which the engi ne is designed dictates the performance 
+requirement of a gas turbine engine.  The performance requirement is mainly 
+determined by the amount of s haft horsepower (s.h.p.) the engine develops for a given 
+set of conditions.  The majority of airc raft gas turbine engines are rated at standard 
+day conditions of 59 F and 29.92 inches Hg.  This prov ides a baseline to which gas 
+turbine engines of all types can be compared.  The need for high efficiency in the engine bec omes more important as fuels become 
+more costly.  Engine efficiency is primarily  defined by the specif ic fuel consumption 
+(s.f.c.) of the engine at a given set of conditions.  Many factors affect both the efficiency and the performance of the engine.  The mass 
+flow rate of air through the engine will dict ate engine performance.  Any restrictions 
+acting against the smooth flow of air through the engine will limit the engine's 
+performance.  The pressure ratio of  the compressor, the engine operating 
+temperatures (turbine inlet temperature), and the individual component efficiencies will 
+also influence both the performance and the effi ciency of the overall engine.  All these 
+factors are considered during the design of the engine.  An  optimum pressure ratio, 
+turbine inlet temperature, and air mass flow  rate are selected to obtain the required 
+performance in the most efficient manner.  In addition, individual engine components 
+are designed to minimize flow losses to maximize component efficiencies. 
+
+5 The following graphic shows the typical temper ature and pressure rise through the gas 
+flow path. 
+ 
+ 
+ENGINE SECTIONS 
+ Inlet 
+ 
+The air inlet duct must provide clean and unrestr icted airflow to the engine.  Clean and 
+undisturbed inlet airflow ext ends engine life by preventi ng erosion, corrosion, and 
+foreign object damage (FOD).  Consideration of atmospheric conditions such  as dust, salt, industrial pollution, foreign 
+objects (birds, nuts and bolts), and temper ature (icing conditions) must be made when 
+designing the inlet system.  Fairings shoul d be installed between the engine air inlet 
+housing and the inlet duct to ensure minimum ai rflow losses to the engine at all airflow 
+conditions.   The inlet duct assembly is usually desi gned and produced as a sepa rate system rather 
+than as part of the design and production of the engine. 
+ 
+Compressor 
+ 
+The compressor is responsible for providing the turbine with all t he air it needs in an 
+efficient manner.  In addition, it must supply this air at high static pressures.  The 
+example of a large turboprop axial flow compressor will be used.  The compressor is 
+Engine Temperature and Pressure Flow  
+6 assumed to contain fourteen stages of rotor blades and stator vanes.  The overall 
+pressure ratio (pressure at the back of t he compressor compared to pressure at the 
+front of the compressor) is approximately 9. 5:1.  At 100% (>13, 000) RPM, the engine 
+compresses approximately 433 cubic feet of  air per second.  At standard day air 
+conditions, this equals approximately 33 pounds of air per second.  The compressor 
+also raises the temperat ure of the air by about 550 F as the air is compressed and 
+moved rearward.  The power required to driv e a compressor of this size at maximum 
+rated power is approximately 7000 horsepower.  In an axial flow compressor, each stage incr ementally boosts the pressure from the 
+previous stage.  A single st age of compression consists of a set of rotor blades 
+attached to a rotating disk, followed by stator  vanes attached to a stationary ring.  The 
+flow area between the compressor blades is slightly divergent.  Flow area between 
+compressor vanes is also divergen t, but more so than for the blades. 
+ In general terms, the compressor rotor bl ades convert mechanical energy into 
+gaseous energy.  This energy conversion greatly increases total pressure (P
+t).  Most of 
+the increase is in the form of velocity (P i), with a small increase in static pressure (P s) 
+due to the divergence of the blade flow paths.  The stator vanes slow the ai r by means of their divergent  duct shape, converting 'the 
+accelerated velocity (P
+i) to higher static pressure (P s).  The vanes are positioned at an 
+angle such that the exiting air is directed into  the rotor blades of t he next stage at the 
+most efficient angle.  This process is repeat ed fourteen times as the air flows from the 
+first stage through the fourteenth stage.  Figure 2-4 shows one stage of the 
+compressor and a graph of the pressure char acteristics as the air flows through the 
+stage.  In addition to the fourteen stages of blades and vanes, the compressor also incorporates the inlet guide vanes and the outlet guide vanes.  These vanes, located 
+at the inlet and the outlet of the compresso r, are neither diver gent nor convergent.  
+The inlet guide vanes direct air to the fi rst stage compressor blades at the "best" 
+angle.  The outlet guide vanes "straighten" the air to provide the combustor with the 
+proper airflow direction.  
+
+7 The efficiency of a compressor is primar ily determined by the smoothness of the 
+airflow.  During design, every effort is made to keep the air flowing smoothly through 
+the compressor to minimize airflow losses due to friction and turbulence.  This task is a 
+difficult one, since the air is forced to fl ow into ever-higher pressure zones.  
+ Air has the natural tendency to flow toward low-pressure zones.  If air were allowed to 
+flow "backward" into the lower pressure zones, the efficiency of the compressor would 
+decrease tremendously as the energy used to increase the pressure of the air was 
+wasted.  To prevent this from occurring, seals are incorporated  at the base of each 
+row of vanes to prevent air leakage.  In addition, the tip clearances of the rotating 
+blades are also kept at a minimum by the use of coating on the inner surface of the 
+compressor case.  All components used in the fl ow path of the compressor are shaped in the form of 
+airfoils to maintain the smoothest airflow possibl e.  Just as is the case for the wings of 
+an airplane, the angle at which the air flow s across the airfoils is critical to 
+performance.  The blades and vanes of the compressor are positi oned at the optimum 
+angles to achieve the most efficient airflo w at the compressor’s maximum rated speed. 
+ Any deviation from the maximum rated s peed changes the characteristics of the 
+airflow within the compressor.  The blades  and vanes are no longer positioned at their 
+optimum angles.  Many engines use bleed valv es to unload the force of excess air in 
+the compressor when it operates at less than optimum speed.  The example engine 
+incorporates four bleed valves  at each of the fifth and t enth compressor stages.  They 
+are open until 13,000 RPM (~94% maximum) is  reached, and allow some of the 
+compressed air to flow out to the atmosphere.  This results in higher air velocities over 
+the blade and vane airfoils, improving the airfo il angles.  The potential for airfoil stalling 
+is reduced, and compressor acceleration can be accomplished without surge.  
+Diffuser  
+ 
+Air leaves the compressor through exit guide vanes, which convert the radial 
+component of the air flow out of the compre ssor to straight-line flow.  The air then 
+enters the diffuser section of the engine, whic h is a very divergent  duct.  The primary 
+function of the diffuser structure is aerody namic.  The divergent duct shape converts 
+most of the air’s velocity (P
+i) into static pressure (P S).  As a result, the highest static 
+pressure and lowest velocity in the entire engine is at t he point of diffuser discharge 
+and combustor inlet.  Other aerodynamic design considerations that  are important in 
+the diffuser section arise from the need for a short flow path, unifo rm flow distribution, 
+and low drag loss.  In addition to critical aerodynamic f unctions, the diffuser also provides: 
+ Engine structural support, including engine mounting to the nacelle 
+ Support for the rear compressor bearings and seals 
+8  Bleed air ports, which provide pressurized air for: 
+ airframe "customer" requirem ents (air conditioning, etc.) 
+ engine inlet anti-icing 
+ control of acceleration bleed air valves 
+ Pressure and scavenge oil passages for t he rear compressor and front turbine 
+bearings. 
+ Mounting for the fuel nozzles. 
+ 
+Combustor 
+ 
+Once the air flows through the diffuser, it enters the combustion section, also called 
+the combustor.  The combustion section has the difficult task of controlling the burning 
+of large amounts of fuel and ai r.  It must release the heat in a manner that the air is 
+expanded and accelerated to give a smooth and stable stream of uniformly-heated gas 
+at all starting and operating conditions.  Th is task must be accomplished with minimum 
+pressure loss and maximum heat release.  In addition, the combustion liners must 
+position and control the fire to prevent  flame contact with any metal parts. 
+ The engine in this example uses a can-annul ar combustion section.  Six combustion 
+liners (cans) are positioned within an annulus  created by inner and outer combustion 
+cases.  Combustion takes place in the fo rward end or primary zone of the cans.  
+Primary air (amounting to about one fourth of t he total engine’s total airflow) is used to 
+support the combustion process.  The rema ining air, referred to as secondary or 
+dilution air, is admitted into the liners in a controlled manner.  The secondary air 
+controls the flame pattern, cools the liner walls, dilutes the temperature of the core 
+gasses, and provides mass.  This cooling air is critical, as the flame temperature is 
+above 1930 C (3500'F), which is higher than the meta ls in the engine can endure.  It is 
+important that the f uel nozzles and combustion liners control the burning and mixing of 
+fuel and air under all conditions to avoid exce ss temperatures reaching the turbine or 
+combustion cases.  Maximum combustion se ction outlet temperature (turbine inlet 
+temperature) in this engine is about 1070 C (>1950 F). 
+ The rear third of the combustion liners is t he transition section.  The transition section 
+has a very convergent duct shape, which begins accelerating the gas stream and 
+reducing the static pressure in preparati on for entrance to the turbine section. 
+ 
+Turbine 
+ 
+This example engine has a four-stage turbi ne.  The turbine converts the gaseous 
+energy of the air/burned fuel mi xture out of the combustor into mechanical energy to 
+drive the compressor, driven accessories, and,  through a reduction gear, the propeller.  
+The turbine converts gaseous energy into  mechanical energy by expanding the hot, 
+high-pressure gases to a lower temperature and pressure.  Each stage of the turbine consists of a ro w of stationary vanes followed by a row of 
+rotating blades.  This is the reverse of the or der in the compressor.  In the compressor, 
+9 energy is added to the gas by the rotor blades , then converted to static pressure by 
+the stator vanes.  In the turbine, the st ator vanes increase gas velocity, and then the 
+rotor blades extract energy.  The vanes and blades are airfoils  that provide for a smooth flow of the gases.  As the 
+airstream enters the turbine se ction from the combustion se ction, it is accelerated 
+through the first stage stator vanes.  The stator vanes (also called nozzles) form 
+convergent ducts that conv ert the gaseous heat and pressure energy into higher 
+velocity gas flow (P
+i).  In addition to accelerating the gas, the vanes "turn" the flow to 
+direct it into the rotor blades at the optimum angle.  As the mass of the high velocity gas fl ows across the turbine blades, the gaseous 
+energy is converted to mechanical energy.  Ve locity, temperature, and pressure of the 
+gas are sacrificed in order to  rotate the turbine to generate shaft power.  Figure 2-5 
+represents one stage of the turb ine and the characteristics of  the gases as it flows 
+through the stage.  The efficiency of the turbine is determined by how well it extracts mechanical energy from the hot, high-velocity gasses.  Since ai r flows from a high-pre ssure zone to a low-
+pressure zone, this task is accomplished fair ly easily.  The use of properly positioned 
+airfoils allows a smooth flow and expansion of gases through the blades and vanes of 
+the turbine.  All the air must flow across the airfoils to ac hieve maximum efficiency in the turbine.  In 
+order to ensure this, seals are used at the base of the vanes to minimize gas flow 
+around the vanes instead of thr ough the intended gas path.  In  addition, the first three 
+stages of the turbine blades have tip shrouds  to minimize gas flow around the blade 
+tips.  
+ 
+Exhaust  
+ 
+After the gas has passed through the turbi ne, it is discharged through the exhaust.  
+Though most of the gaseous energy is convert ed to mechanical energy by the turbine, 
+a significant amount of pow er remains in the exhaust gas.  This gas energy is 
+accelerated through the convergent duct shape of  the exhaust to make it more useful 
+
+10 as jet thrust - the principle of equal and oppos ite reaction means that the force of the 
+exhausted air drives the airplane forward.   
+EFFECTS OF TURBINE TEMPERATURE 
+ 
+The materials used in the turbine section of the engine limit the maximum temperature 
+at which a gas turbine engine can operate.  The first metal the hot gases from the 
+combustion section strike is the turbine inle t.  The temperature of  the gas stream is 
+carefully monitored to ensure that  overtemperature does not occur. 
+ 
+ 
+ 
+Sample Engine Pressure, Temperature, and Velocity   
+ 
+ 
+Compromises are made in turbine design to  achieve the optimum balance of power, 
+efficiency, cost,  engine life, and other factors.  As an example, our sample engine can 
+operate at a higher turbine inlet temperat ure than previous m odels due to improved 
+materials and design.  The higher temper ature allows for increased power and 
+improved efficiency while adding higher cost for the direct cooling of the first turbine 
+stage airfoils and other components. 
+
+11  
+ 
+EFFECTS OF ATMOSPHERIC CONDITIONS 
+ 
+The performance of the gas turbine engi ne is dependent on the ma ss of air entering 
+the engine.  At a constant s peed, the compressor pumps a constant volume of air into 
+the engine with no regard for air mass or density.  If the density of the air decreases, 
+the same volume of air will contain less mass,  so less power is produced.  If air density 
+increases, power output also increases as the air mass flow increases for the same 
+volume of air.  Atmospheric conditions affect the performanc e of the engine since the density of the 
+air will be different under different  conditions.  On a cold day, the air density is high, so 
+the mass of the air entering the compresso r is increased.  As a result, higher 
+horsepower is produced.  In contrast, on a hot  day, or at high alti tude, air density is 
+decreased, resulting in a decrease of output shaft power. 
+ 
+ 
+COMPRESSOR STALL/SURGE 
+ 
+Background information 
+ 
+Compressor stall or surge is not peculiar to  any one particular brand or type of engine.  
+It may occur on any turbine engine if condi tions are right.  Stall has been encountered 
+on two-stage or turbo-superc harged piston engines, so there is no need to look upon 
+stall as some mysterious product of gas turbine engines.  Any number of mechanical defects, such as  bad spark plugs, lean  carburetion, poor 
+timing, or sticking valves, can result in reci procating engines backfirin g.  Similarly, for 
+gas turbine engines, maintenance or flight  conditions can influence the compressor 
+stall or surge appreciably.  The condition and operation of the bleed valve and fuel 
+system components are of vital importance in maintaining surge-free operation. 
+ Why are engines at risk of surge?  As engines are designed to meet demands for 
+higher power or lower specific fuel c onsumption, the engines must accommodate: 
+ 
+ Increased mass airflow. 
+ Increased pressure (compression) ratio. 
+ Increased maximum allowable turbine inlet and outlet temperatures. 
+ Improved efficiency of the compressor and turbine sections. 
+ Quick engine starts and rapid accelerations are also desirable.  To provide higher 
+power with low specific f uel consumption and acceptabl e starting and acceleration 
+characteristics, it is necessary to operate as close to the surge region as possible. 
+ 
+12 To prevent compressor stall or surge, fuel  flow must be proper ly metered during the 
+start and acceleration cycle of any gas tu rbine engine.  To accomplish this, the 
+example engine incorporates 5th and 10th stage acceleration bleed valves. 
+ In general, there are fewer surge problems on centrifugal compressors than on axial 
+flow compressors.  There are several reasons  for the difference; the primary reason is 
+that centrifugal flow compressors operate at somewhat lower pressure ratios than axial 
+flow compressors.  
+Explanation of stall/surge 
+ 
+A surge from a turbine engine is the result of instability of the engine's operating cycle.  
+As discussed earlier, the oper ating cycle of the turbine engine consists of intake, 
+compression, combustion, and exhaust, which o ccur simultaneously in different places 
+in the engine.  The part of t he cycle susceptible to instability is the compression phase.  
+Compressor surge may be caused by engine det erioration, it may be the result of 
+ingestion of birds or ice, or it may be the final sound from a “severe engine damage” 
+type of failure.  In a turbine engine, compression is acco mplished aerodynamically as the air passes 
+through the stages of the compressor, rather than by confinement, as  is the case in a 
+piston engine.  The air flowing over the compresso r airfoils can stall just as the air over 
+the wing of an airplane can.  When this airf oil stall occurs, the passage of air through 
+the compressor becomes unstable and the compressor can no longer compress the incoming air.  The high-pressure air behind t he stall further back in the engine escapes 
+forward through the compressor and out the inlet.   This escape is sudden, rapid and often quite  audible as a loud bang.  Engine surge 
+can be accompanied by visible flames forw ard out the inlet and rearward out the 
+tailpipe.  Instruments may show high EG T and EPR or rotor speed changes; but, in 
+many stalls, the event is over so quickly that the instruments do not have time to 
+respond.  Once the air from within the engine escapes , the reason (reasons) for the instability 
+may self-correct and the compression process may re-establish itself.  A single surge 
+and recovery will occur quite rapidly, usually within fractions of a second.  Depending 
+on the reason for the cause of the compre ssor instability, an engine might experience: 
+ 
+1.  A single self-recovering surge 2.  Multiple surges prior to self-recovery 3.  Multiple surges requiring pilot action in order to recover 4.  A non-recoverable surge. 
+  For complete, detailed procedures, flight crew s must follow the appropriate checklists 
+and emergency procedures detailed in their specific Airplane Flight Manual.  In 
+general, however, during a single self-recoveri ng surge, the cockpit engine indications 
+13 may fluctuate slightly and brie fly.  The flight crew may not notice the fluctuation.  
+(Some of the more recent engines may even have fuel-flow logic that helps the engine 
+self-recover from a surge without crew inte rvention.  The stall may go completely 
+unnoticed, or it may be annunciated to the crew – for information only – via EICAS 
+messages.)  Alternatively, the engine may su rge two or three times before full self-
+recovery.  When this happens, there is likel y to be cockpit engine instrumentation 
+shifts of sufficient magnit ude and duration to be noticed by the flight crew.  If the 
+engine does not recover automatically from the surge, it may surge continually until the 
+pilot takes action to stop the process.  The desired pilot action is to retard the power 
+lever until the engine recovers.  The flight  crew should then SLOWLY re-advance the 
+power lever.  Occasionally, an engine may su rge only once but still not self-recover. 
+ The actual cause for the compressor surge is  often complex and may or may not result 
+from severe engine damage.  Rarely does a single compressor surge CAUSE severe engine damage, but sustained surg ing will eventually over-heat  the turbine, as too 
+much fuel is being provided for the volume of air that is reaching the combustor.  Compressor blades may also be damaged and fa il as a result of  repeated violent 
+surges; this will rapidly result in an engine which cannot run at any power setting.  

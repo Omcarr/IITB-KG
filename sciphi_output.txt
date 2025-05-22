@@ -1,0 +1,28 @@
+Perform Named Entity Recognition (NER) and extract knowledge graph triplets from the text. NER identifies named entities of given entity types, and triple extraction identifies relationships between entities using specified predicates.
+**Entity Types:**
+        {"LOCATION", "POSITION", "DATE", "CITY", "COUNTRY", "NUMBER"}
+        
+        **Predicates:**
+        {"POPULATION", "AREA" }
+        
+        **Text:**
+        {San Francisco,[24] officially the City and County of San Francisco, is a commercial, financial, and cultural center in Northern California. 
+
+With a population of 808,437 residents as of 2022, San Francisco is the fourth most populous city in the U.S. state of California behind Los Angeles, San Diego, and San Jose.}
+        
+        
+{
+    "entities_and_triples": [
+        "[1], CITY:San Francisco",
+        "[2], COUNTRY:United States",
+        "[3], LOCATION:Northern California",
+        "[4], DATE:2022",
+        "[5], NUMBER:808,437",
+        "[1] POPULATION [5]",
+        "[6], COUNTRY:California",
+        "[7], CITY:Los Angeles",
+        "[8], CITY:San Diego",
+        "[9], CITY:San Jose",
+        "[2], LOCATION:United States"
+    ]
+}
