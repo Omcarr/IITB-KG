@@ -12,300 +12,219 @@ LLM = "llama-3.3-70b-versatile"
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-class GroqNeo4jProcessor:
+class CSVToKnowledgeGraph:
     def __init__(self, groq_api_key: str, neo4j_uri: str, neo4j_user: str, neo4j_password: str):
-        """Initialize the processor with API credentials"""
+        """
+        Initialize the CSV to Knowledge Graph converter
+        
+        Args:
+            groq_api_key: Your Groq API key
+            neo4j_uri: Neo4j database URI (e.g., "bolt://localhost:7687")
+            neo4j_user: Neo4j username
+            neo4j_password: Neo4j password
+        """
         self.groq_client = Groq(api_key=groq_api_key)
-        self.neo4j_driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_user, neo4j_password))
+        self.driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_user, neo4j_password))
         
     def close(self):
         """Close Neo4j connection"""
-        self.neo4j_driver.close()
+        self.driver.close()
     
-    def prepare_csv_sample(self, csv_file_path: str, sample_rows: int = 10) -> str:
-        """Prepare CSV sample for the LLM prompt"""
+    def read_csv(self, csv_file_path: str) -> pd.DataFrame:
+        """Read CSV file into pandas DataFrame"""
         try:
-            df = pd.read_csv(csv_file_path, engine='python', on_bad_lines='skip', skipinitialspace=True)
-            logger.info(f"CSV loaded: {df.shape[0]} rows, {df.shape[1]} columns")
-            
-            # Get sample data
-            sample_df = df.head(sample_rows)
-            csv_sample = sample_df.to_string(index=False)
-            
-            return csv_sample, df
+            df = pd.read_csv(csv_file_path)
+            logger.info(f"Successfully loaded CSV with {len(df)} rows and {len(df.columns)} columns")
+            return df
         except Exception as e:
-            logger.error(f"Error loading CSV: {e}")
+            logger.error(f"Error reading CSV file: {e}")
             raise
     
-    def create_groq_prompt(self, csv_sample: str) -> str:
-        """Create the standardized prompt for Groq LLM"""
+    def extract_entities_relationships(self, text: str) -> Dict[str, Any]:
+        """
+        Use Groq LLaMA to extract entities and relationships from text
         
-        prompt = f"""You are an expert in knowledge graph modeling and Neo4j database design. Your task is to analyze a CSV dataset and provide a comprehensive Neo4j graph schema and Cypher queries.
-
-                **CSV Data Analysis:**
-                ```
-                {csv_sample}
-                ```
-
-                **Instructions:**
-                1. Analyze the CSV structure and identify potential entities, relationships, and attributes
-                2. Design an optimal Neo4j graph schema with appropriate node labels and relationship types
-                3. Provide complete Cypher queries for data import
-                4. Ensure the schema follows graph database best practices
-
-                **Required Output Format (JSON):**
-                ```json
-                {{
-                "analysis": {{
-                    "csv_structure": "Brief description of the CSV structure",
-                    "identified_entities": ["List of main entities"],
-                    "identified_relationships": ["List of relationships between entities"],
-                    "data_quality_notes": "Any data quality observations"
-                }},
-                "schema": {{
-                    "nodes": [
-                    {{
-                        "label": "NodeLabel",
-                        "properties": ["property1", "property2"],
-                        "description": "What this node represents",
-                        "unique_property": "property_name_for_uniqueness"
-                    }}
-                    ],
-                    "relationships": [
-                    {{
-                        "type": "RELATIONSHIP_TYPE",
-                        "from": "SourceNodeLabel",
-                        "to": "TargetNodeLabel",
-                        "properties": ["rel_property1"],
-                        "description": "What this relationship represents"
-                    }}
-                    ]
-                }},
-                "cypher_queries": {{
-                    "constraints": [
-                    "CREATE CONSTRAINT constraint_name IF NOT EXISTS FOR (n:NodeLabel) REQUIRE n.property IS UNIQUE"
-                    ],
-                    "indexes": [
-                    "CREATE INDEX index_name IF NOT EXISTS FOR (n:NodeLabel) ON (n.property)"
-                    ],
-                    "data_import": [
-                    "LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row CREATE (n:NodeLabel {{property: row.column}})"
-                    ]
-                }},
-                "mapping": {{
-                    "csv_column_to_graph": {{
-                    "csv_column_name": {{
-                        "maps_to": "node_property or relationship_property",
-                        "node_label": "ApplicableNodeLabel",
-                        "data_type": "string/integer/float/boolean/date",
-                        "transformation": "any data transformation needed"
-                    }}
-                    }}
-                }},
-                "sample_queries": [
-                    {{
-                    "description": "Find all nodes of specific type",
-                    "cypher": "MATCH (n:NodeLabel) RETURN n LIMIT 10"
-                    }}
-                ]
-                }}
-                ```
-
-                **Requirements:**
-                - Use clear, descriptive node labels and relationship types
-                - Ensure each node has a unique identifier property
-                - Handle potential data quality issues (missing values, duplicates)
-                - Follow Neo4j naming conventions (CamelCase for labels, UPPER_CASE for relationships)
-                - Provide both creation and querying examples
-                - Consider scalability and performance
-                - Handle hierarchical relationships if present
-                - Include data validation and error handling
-
-                **Important Notes:**
-                - Analyze the data semantically, not just structurally
-                - Identify implicit relationships between entities
-                - Consider creating intermediate nodes for complex relationships
-                - Suggest indexes for frequently queried properties
-                - Provide alternative modeling approaches if applicable
-
-                Please provide ONLY the JSON output without additional explanations."""
-
-        return prompt
-    
-    def query_groq_llm(self, prompt: str) -> Dict[str, Any]:
-        """Query Groq LLM and parse the response"""
+        Args:
+            text: Input text to analyze
+            
+        Returns:
+            Dictionary containing entities and relationships
+        """
+        prompt = f"""
+        Analyze the following text and extract entities and relationships. 
+        Return your response as a valid JSON object with the following structure:
+        {{
+            "entities": [
+                {{"name": "entity_name", "type": "entity_type", "properties": {{"key": "value"}}}}
+            ],
+            "relationships": [
+                {{"source": "source_entity", "target": "target_entity", "type": "relationship_type", "properties": {{"key": "value"}}}}
+            ]
+        }}
+        
+        Entity types can include: PERSON, ORGANIZATION, LOCATION, PRODUCT, CONCEPT, DATE, etc.
+        Relationship types can include: WORKS_FOR, LOCATED_IN, CREATED, OWNS, RELATED_TO, etc.
+        
+        Text to analyze:
+        {text}
+        
+        JSON Response:
+        """
+        
         try:
-            chat_completion = self.groq_client.chat.completions.create(
+            response = self.groq_client.chat.completions.create(
                 messages=[
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
+                    {"role": "system", "content": "You are an expert in knowledge graph extraction. Always respond with valid JSON only."},
+                    {"role": "user", "content": prompt}
                 ],
-                model= LLM,
-                temperature=0.1,  # Low temperature for consistent output
-                max_tokens=4000,
-                top_p=0.9
+                model= LLM,  # You can also use "llama-3.1-8b-instant" for faster processing
+                temperature=0.1,
+                max_tokens=2000
             )
             
-            response_text = chat_completion.choices[0].message.content
-            logger.info("Received response from Groq LLM")
+            response_text = response.choices[0].message.content.strip()
             
-            # Extract JSON from response (handle cases where LLM adds extra text)
-            json_match = re.search(r'```json\s*(.*?)\s*```', response_text, re.DOTALL)
+            # Clean up the response to extract JSON
+            json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
             if json_match:
-                json_str = json_match.group(1)
+                json_str = json_match.group()
+                return json.loads(json_str)
             else:
-                # Try to find JSON object directly
-                json_start = response_text.find('{')
-                json_end = response_text.rfind('}') + 1
-                if json_start != -1 and json_end != -1:
-                    json_str = response_text[json_start:json_end]
-                else:
-                    json_str = response_text
-            
-            # Parse JSON
-            schema_response = json.loads(json_str)
-            logger.info("Successfully parsed LLM response")
-            return schema_response
-            
-        except json.JSONDecodeError as e:
-            logger.error(f"Failed to parse JSON response: {e}")
-            logger.error(f"Response text: {response_text}")
-            raise
+                logger.warning(f"No JSON found in response: {response_text}")
+                return {"entities": [], "relationships": []}
+                
         except Exception as e:
-            logger.error(f"Error querying Groq LLM: {e}")
-            raise
+            logger.error(f"Error extracting entities and relationships: {e}")
+            return {"entities": [], "relationships": []}
     
-    def validate_schema_response(self, schema_response: Dict[str, Any]) -> bool:
-        """Validate the schema response from LLM"""
-        required_keys = ['analysis', 'schema', 'cypher_queries', 'mapping']
+    def process_csv_row(self, row: pd.Series) -> Dict[str, Any]:
+        """
+        Process a single CSV row to extract entities and relationships
         
-        for key in required_keys:
-            if key not in schema_response:
-                logger.error(f"Missing required key: {key}")
-                return False
+        Args:
+            row: Pandas Series representing a CSV row
+            
+        Returns:
+            Dictionary containing extracted entities and relationships
+        """
+        # Combine all text fields in the row
+        text_content = " ".join([str(value) for value in row.values if pd.notna(value) and str(value).strip()])
         
-        # Validate schema structure
-        if 'nodes' not in schema_response['schema'] or 'relationships' not in schema_response['schema']:
-            logger.error("Schema missing nodes or relationships")
-            return False
+        if not text_content.strip():
+            return {"entities": [], "relationships": []}
         
-        # Validate cypher_queries structure
-        cypher_keys = ['constraints', 'indexes', 'data_import']
-        for key in cypher_keys:
-            if key not in schema_response['cypher_queries']:
-                logger.warning(f"Missing cypher query type: {key}")
-        
-        logger.info("Schema response validation passed")
-        return True
+        return self.extract_entities_relationships(text_content)
     
-    def create_neo4j_database(self, schema_response: Dict[str, Any], csv_file_path: str) -> None:
-        """Create Neo4j database based on LLM schema response"""
-        
-        if not self.validate_schema_response(schema_response):
-            raise ValueError("Invalid schema response")
-        
-        with self.neo4j_driver.session() as session:
-            try:
-                # Step 1: Create constraints
-                logger.info("Creating constraints...")
-                for constraint in schema_response['cypher_queries'].get('constraints', []):
-                    try:
-                        session.run(constraint)
-                        logger.info(f"Created constraint: {constraint}")
-                    except Exception as e:
-                        logger.warning(f"Constraint creation failed (may already exist): {e}")
-                
-                # Step 2: Create indexes
-                logger.info("Creating indexes...")
-                for index in schema_response['cypher_queries'].get('indexes', []):
-                    try:
-                        session.run(index)
-                        logger.info(f"Created index: {index}")
-                    except Exception as e:
-                        logger.warning(f"Index creation failed (may already exist): {e}")
-                
-                # Step 3: Import data
-                logger.info("Importing data...")
-                
-                # Copy CSV to Neo4j import directory or use file:// protocol
-                neo4j_csv_path = self.prepare_csv_for_neo4j(csv_file_path)
-                
-                for import_query in schema_response['cypher_queries'].get('data_import', []):
-                    # Replace generic file path with actual path
-                    modified_query = import_query.replace('file:///data.csv', f'file:///{neo4j_csv_path}')
-                    
-                    try:
-                        result = session.run(modified_query)
-                        logger.info(f"Executed import query: {modified_query[:100]}...")
-                        
-                        # Log summary if available
-                        summary = result.consume()
-                        if hasattr(summary, 'counters'):
-                            logger.info(f"Nodes created: {summary.counters.nodes_created}")
-                            logger.info(f"Relationships created: {summary.counters.relationships_created}")
-                    
-                    except Exception as e:
-                        logger.error(f"Import query failed: {e}")
-                        logger.error(f"Query: {modified_query}")
-                        # Continue with other queries
-                
-                logger.info("Database creation completed successfully")
-                
-            except Exception as e:
-                logger.error(f"Error creating Neo4j database: {e}")
-                raise
-    
-    def prepare_csv_for_neo4j(self, csv_file_path: str) -> str:
-        """Prepare CSV file for Neo4j import"""
-        # For simplicity, return the filename
-        # In production, you might want to copy the file to Neo4j's import directory
-        return os.path.basename(csv_file_path)
-    
-    def get_database_statistics(self) -> Dict[str, Any]:
-        """Get statistics about the created database"""
-        with self.neo4j_driver.session() as session:
-            stats = {}
+    def create_neo4j_constraints(self):
+        """Create constraints and indexes in Neo4j for better performance"""
+        with self.driver.session() as session:
+            # Create uniqueness constraints for common entity types
+            constraints = [
+                "CREATE CONSTRAINT entity_name IF NOT EXISTS FOR (n:Entity) REQUIRE n.name IS UNIQUE",
+                "CREATE CONSTRAINT person_name IF NOT EXISTS FOR (n:PERSON) REQUIRE n.name IS UNIQUE",
+                "CREATE CONSTRAINT org_name IF NOT EXISTS FOR (n:ORGANIZATION) REQUIRE n.name IS UNIQUE",
+                "CREATE CONSTRAINT location_name IF NOT EXISTS FOR (n:LOCATION) REQUIRE n.name IS UNIQUE"
+            ]
             
-            # Get node counts by label
-            result = session.run("CALL db.labels() YIELD label RETURN label")
-            labels = [record['label'] for record in result]
-            
-            for label in labels:
-                count_result = session.run(f"MATCH (n:`{label}`) RETURN count(n) as count")
-                stats[f"{label}_nodes"] = count_result.single()['count']
-            
-            # Get relationship counts
-            result = session.run("MATCH ()-[r]->() RETURN count(r) as total_relationships")
-            stats['total_relationships'] = result.single()['total_relationships']
-            
-            # Get relationship types
-            result = session.run("CALL db.relationshipTypes() YIELD relationshipType RETURN relationshipType")
-            rel_types = [record['relationshipType'] for record in result]
-            stats['relationship_types'] = rel_types
-            
-            return stats
-    
-    def run_sample_queries(self, schema_response: Dict[str, Any]) -> None:
-        """Run sample queries provided by the LLM"""
-        logger.info("Running sample queries...")
-        
-        with self.neo4j_driver.session() as session:
-            for query_info in schema_response.get('sample_queries', []):
+            for constraint in constraints:
                 try:
-                    description = query_info.get('description', 'No description')
-                    cypher = query_info.get('cypher', '')
-                    
-                    logger.info(f"Running query: {description}")
-                    result = session.run(cypher)
-                    
-                    # Display first few results
-                    records = list(result)
-                    logger.info(f"Query returned {len(records)} records")
-                    
-                    for i, record in enumerate(records[:3]):  # Show first 3 results
-                        logger.info(f"  Result {i+1}: {dict(record)}")
-                
+                    session.run(constraint)
+                    logger.info(f"Created constraint: {constraint}")
                 except Exception as e:
-                    logger.error(f"Sample query failed: {e}")
+                    logger.warning(f"Constraint may already exist: {e}")
+    
+    def create_entity_in_neo4j(self, entity: Dict[str, Any]):
+        """Create an entity node in Neo4j"""
+        with self.driver.session() as session:
+            entity_type = entity.get('type', 'Entity').upper()
+            entity_name = entity['name']
+            properties = entity.get('properties', {})
+            
+            # Create Cypher query
+            cypher = f"""
+            MERGE (e:{entity_type} {{name: $name}})
+            SET e += $properties
+            RETURN e
+            """
+            
+            session.run(cypher, name=entity_name, properties=properties)
+    
+    def create_relationship_in_neo4j(self, relationship: Dict[str, Any]):
+        """Create a relationship in Neo4j"""
+        with self.driver.session() as session:
+            source = relationship['source']
+            target = relationship['target']
+            rel_type = relationship['type'].upper().replace(' ', '_')
+            properties = relationship.get('properties', {})
+            
+            # Create Cypher query
+            cypher = f"""
+            MATCH (a {{name: $source}})
+            MATCH (b {{name: $target}})
+            MERGE (a)-[r:{rel_type}]->(b)
+            SET r += $properties
+            RETURN r
+            """
+            
+            session.run(cypher, source=source, target=target, properties=properties)
+    
+    def process_csv_to_knowledge_graph(self, csv_file_path: str, batch_size: int = 10):
+        """
+        Main method to process CSV file and create knowledge graph
+        
+        Args:
+            csv_file_path: Path to the CSV file
+            batch_size: Number of rows to process at once
+        """
+        # Read CSV
+        df = self.read_csv(csv_file_path)
+        
+        # Create Neo4j constraints
+        self.create_neo4j_constraints()
+        
+        # Clear existing data (optional - remove this if you want to append)
+        with self.driver.session() as session:
+            session.run("MATCH (n) DETACH DELETE n")
+            logger.info("Cleared existing Neo4j data")
+        
+        # Process CSV rows
+        total_entities = 0
+        total_relationships = 0
+        
+        for index, row in df.iterrows():
+            logger.info(f"Processing row {index + 1}/{len(df)}")
+            
+            # Extract entities and relationships
+            extracted_data = self.process_csv_row(row)
+            
+            # Create entities in Neo4j
+            for entity in extracted_data.get('entities', []):
+                try:
+                    self.create_entity_in_neo4j(entity)
+                    total_entities += 1
+                except Exception as e:
+                    logger.error(f"Error creating entity {entity}: {e}")
+            
+            # Create relationships in Neo4j
+            for relationship in extracted_data.get('relationships', []):
+                try:
+                    self.create_relationship_in_neo4j(relationship)
+                    total_relationships += 1
+                except Exception as e:
+                    logger.error(f"Error creating relationship {relationship}: {e}")
+            
+            # Process in batches to avoid overwhelming the API
+            if (index + 1) % batch_size == 0:
+                logger.info(f"Processed {index + 1} rows so far...")
+        
+        logger.info(f"Knowledge graph creation completed!")
+        logger.info(f"Total entities created: {total_entities}")
+        logger.info(f"Total relationships created: {total_relationships}")
+    
+    def query_knowledge_graph(self, cypher_query: str) -> List[Dict]:
+        """Execute a Cypher query on the knowledge graph"""
+        with self.driver.session() as session:
+            result = session.run(cypher_query)
+            return [record.data() for record in result]
+
+

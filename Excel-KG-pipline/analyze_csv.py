@@ -6,7 +6,7 @@ from neo4j import GraphDatabase
 import os
 from dotenv import load_dotenv
 import logging
-from GroqNeo4jProcessor import GroqNeo4jProcessor
+from GroqNeo4jProcessor import CSVToKnowledgeGraph
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -39,53 +39,52 @@ def main():
     NEO4J_PASSWORD = os.environ.get("NEO4J_PASSWORD")
     CSV_FILE_PATH = os.environ.get("CSV_FILE_PATH")
     
-    # Initialize processor
-    processor = GroqNeo4jProcessor(GROQ_API_KEY, NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD)
+        # Initialize the converter
+    converter = CSVToKnowledgeGraph(
+        groq_api_key=GROQ_API_KEY,
+        neo4j_uri=NEO4J_URI,
+        neo4j_user=NEO4J_USER,
+        neo4j_password=NEO4J_PASSWORD
+    )
     
     try:
-        # Step 1: Prepare CSV sample
-        logger.info("Preparing CSV sample for LLM analysis...")
-        csv_sample, df = processor.prepare_csv_sample(CSV_FILE_PATH)
+        # Process CSV and create knowledge graph
+        converter.process_csv_to_knowledge_graph(CSV_FILE_PATH)
         
-        # Step 2: Create prompt
-        prompt = processor.create_groq_prompt(csv_sample)
+        # Example queries
+        print("\n=== Sample Queries ===")
         
-        # Step 3: Query LLM
-        logger.info("Querying Groq LLM for schema design...")
-        schema_response = processor.query_groq_llm(prompt)
+        # Get all nodes
+        nodes = converter.query_knowledge_graph("MATCH (n) RETURN count(n) as total_nodes")
+        print(f"Total nodes: {nodes[0]['total_nodes']}")
         
-        # Step 4: Display analysis
-        logger.info("LLM Analysis Results:")
-        logger.info(f"CSV Structure: {schema_response['analysis']['csv_structure']}")
-        logger.info(f"Identified Entities: {schema_response['analysis']['identified_entities']}")
-        logger.info(f"Identified Relationships: {schema_response['analysis']['identified_relationships']}")
+        # Get all relationships
+        relationships = converter.query_knowledge_graph("MATCH ()-[r]->() RETURN count(r) as total_relationships")
+        print(f"Total relationships: {relationships[0]['total_relationships']}")
         
-        # Step 5: Create Neo4j database
-        logger.info("Creating Neo4j database...")
-        processor.create_neo4j_database(schema_response, CSV_FILE_PATH)
+        # Get all entity types
+        entity_types = converter.query_knowledge_graph("""
+            MATCH (n) 
+            RETURN labels(n) as entity_types, count(*) as count 
+            ORDER BY count DESC
+        """)
+        print("\nEntity types:")
+        for item in entity_types[:10]:  # Top 10
+            print(f"  {item['entity_types']}: {item['count']}")
         
-        # Step 6: Get statistics
-        stats = processor.get_database_statistics()
-        logger.info("Database Statistics:")
-        for key, value in stats.items():
-            logger.info(f"  {key}: {value}")
-        
-        # Step 7: Run sample queries
-        processor.run_sample_queries(schema_response)
-        
-        logger.info("Process completed successfully!")
-        
-        # Save schema response for reference
-        with open('schema_response.json', 'w') as f:
-            json.dump(schema_response, f, indent=2)
-        logger.info("Schema response saved to schema_response.json")
-        
-    except Exception as e:
-        logger.error(f"Process failed: {e}")
-        raise
-    
+        # Get sample entities and their connections
+        sample_entities = converter.query_knowledge_graph("""
+            MATCH (n)-[r]->(m) 
+            RETURN n.name as source, type(r) as relationship, m.name as target 
+            LIMIT 10
+        """)
+        print("\nSample relationships:")
+        for rel in sample_entities:
+            print(f"  {rel['source']} --[{rel['relationship']}]--> {rel['target']}")
+            
     finally:
-        processor.close()
+        converter.close()
+
 
 if __name__ == "__main__":
     main()
